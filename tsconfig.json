@@ -1,27 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "allowJs": false,
-    "isolatedModules": false,
-    "jsx": "react",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitThis": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "removeComments": true,
-    "strictNullChecks": true,
-    "noLib": false,
-    "preserveConstEnums": true,
-    "pretty": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],
-  "compileOnSave": false,
-  "buildOnSave": false
+  "include": ["src/**/*"]
 }

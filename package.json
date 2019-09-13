@@ -5,19 +5,24 @@
   "main": "dist/how-long-till-lunch.cjs.js",
   "module": "dist/how-long-till-lunch.esm.js",
   "browser": "dist/how-long-till-lunch.umd.js",
-  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/ms": "^0.7.30",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.17",
     "emotion": "^10.0.17",
     "eslint": "^6.3.0",
@@ -33,24 +38,16 @@
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-typescript": "^1.0.0",
     "tslib": "^1.9.3",
-    "typescript": "^3.2.2"
-  },
-  "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "typescript": "^3.2.2",
+    "webpack": "^4.40.1",
+    "webpack-cli": "^3.3.8"
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "ts": "tsc --noEmit",
+    "build": "webpack --mode=production",
     "lint": "yarn run eslint --ext .ts --ext .tsx './src'",
-    "lint:fix": "yarn run eslint './**/*.ts' './**/*.tsx' --fix"
+    "lint:fix": "yarn run eslint './**/*.ts' './**/*.tsx' --fix",
+    "ts": "tsc --noEmit"
   },
   "files": [
     "dist"
