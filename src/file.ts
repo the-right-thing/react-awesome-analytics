@@ -1,3 +1,3 @@
-const file = "string";
+const file = 'string';
 
-export default file
+export default file;
