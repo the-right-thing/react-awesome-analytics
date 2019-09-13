@@ -6,7 +6,9 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDirs": ["src", "stories"],
+    "baseUrl": "src"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", ]
 }

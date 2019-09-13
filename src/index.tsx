@@ -1,21 +1,14 @@
-import React, { Component } from 'react';
-import str from './file';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 
-interface Test {
-    a: number;
-    b: number;
-}
+const Button = () => (
+    <div
+        css={{
+            color: 'red',
+        }}
+    >
+        My button, oh gosh!
+    </div>
+);
 
-const test = ({ a, b }: Test) => {
-    return a + b;
-};
-
-const another = test({ a: 1, b: 2 });
-
-export default class SomeClass extends Component {
-    render() {
-        console.log('another', another);
-        console.log('str', str);
-        return <div>123</div>;
-    }
-}
+export default Button;
