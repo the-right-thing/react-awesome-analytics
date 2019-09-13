@@ -13,17 +13,26 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@types/ms": "^0.7.30",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-emotion": "^10.0.17",
+    "emotion": "^10.0.17",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "eslint-plugin-tangerine": "^0.4.1",
     "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -32,12 +41,16 @@
     "tslib": "^1.9.3",
     "typescript": "^3.2.2"
   },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "ts": "tsc src/*.ts",
-    "lint": "yarn run eslint './**/*.ts'",
-    "lint:fix": "yarn run eslint './**/*.ts' --fix"
+    "ts": "tsc --noEmit",
+    "lint": "yarn run eslint --ext .ts --ext .tsx './src'",
+    "lint:fix": "yarn run eslint './**/*.ts' './**/*.tsx' --fix"
   },
   "files": [
     "dist"
