@@ -22,6 +22,9 @@ module.exports = {
 
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tx", ".tsx"] }],
 
+        // just annoying
+        '@typescript-eslint/explicit-function-return-type': 'off',
+
         // https://github.com/prettier/eslint-plugin-prettier
         // enforce code formatting according to prettier
         'prettier/prettier': 'error',

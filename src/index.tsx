@@ -1,14 +1,3 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { AnalyticsData, AnalyticsProvider, useAnalytics } from './context';
 
-const Button = () => (
-    <div
-        css={{
-            color: 'red',
-        }}
-    >
-        My button, oh gosh!
-    </div>
-);
-
-export default Button;
+export { AnalyticsData, AnalyticsProvider, useAnalytics };
