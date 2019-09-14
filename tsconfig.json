@@ -10,5 +10,7 @@
     "rootDirs": ["src", "stories"],
     "baseUrl": "src"
   },
-  "include": ["src/**/*", ]
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "include": ["src/**/*", "stories/**/*" ]
 }
