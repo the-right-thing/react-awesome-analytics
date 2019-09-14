@@ -1,3 +1,17 @@
-import { AnalyticsData, AnalyticsProvider, useAnalytics } from './context';
+import {
+    AnalyticsContainer,
+    AnalyticsProvider,
+    useAnalytics,
+    AnalyticsData,
+    AnalyticsDataProps,
+    ProviderProps,
+} from './context';
 
-export { AnalyticsData, AnalyticsProvider, useAnalytics };
+export {
+    AnalyticsContainer,
+    AnalyticsProvider,
+    useAnalytics,
+    AnalyticsData,
+    AnalyticsDataProps,
+    ProviderProps,
+};
