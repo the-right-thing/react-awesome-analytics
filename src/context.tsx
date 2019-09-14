@@ -1,63 +1,82 @@
-import React, { createContext, useContext, useState, useEffect, Context } from 'react';
+import React, { createContext, useContext, Context, useMemo } from 'react';
 
-interface ProviderProps {
+export interface ProviderProps {
     children: JSX.Element[] | JSX.Element;
+    onEventFired: (data: {}) => void;
 }
 
-interface AnalyticsDataProps {
+export interface AnalyticsData {
+    [key: string]: {};
+}
+
+export interface AnalyticsDataProps {
     children: JSX.Element[] | JSX.Element;
     name: string;
+    data: AnalyticsData;
 }
 
-interface AnalyticsContext {
-    data: any;
-    add: (name: string) => void;
+interface GlobalAnalyticsContext {
+    add: (name: string, data: AnalyticsData) => void;
+    get: () => AnalyticsData;
+    fire: (namespace: string, payload: {}) => void;
     remove: (name: string) => void;
 }
 
-const context: Context<AnalyticsContext> = createContext({});
-const { Provider, Consumer } = context;
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const globalAnalyticsContext: Context<GlobalAnalyticsContext> = createContext({});
+const namespacesContext: Context<string[]> = createContext([]);
 
-const AnalyticsProvider = ({ children }: ProviderProps) => {
-    const [data, setData] = useState([]);
+const { Provider: GlobalProvider } = globalAnalyticsContext;
+const { Provider: NamespacesProvider } = namespacesContext;
 
-    const add = (name: string) => {
-        if (!data.find(d => name === d)) {
-            setData([...data, name]);
-        }
+const AnalyticsProvider = ({ children, onEventFired }: ProviderProps) => {
+    const analyticsData: AnalyticsData = {};
+
+    const add = (name: string, data: AnalyticsData) => {
+        analyticsData[name] = data;
     };
 
     const remove = (name: string) => {
-        const noName = data.filter(d => d !== name);
-        setData([...noName]);
+        delete analyticsData[name];
     };
 
-    const value = { data, add, remove };
+    const get = () => {
+        return analyticsData;
+    };
 
-    return <Provider value={value}>{children}</Provider>;
+    const fire = (namespace: string, payload: {}) => {
+        const data = { ...analyticsData };
+        data[namespace] = { ...data[namespace], ...payload, action: 'fired' };
+        onEventFired(data);
+    };
+
+    const api = useMemo(() => ({ get, add, remove, fire }), []);
+
+    return <GlobalProvider value={api}>{children}</GlobalProvider>;
 };
 
-const AnalyticsData = ({ children, name }: AnalyticsDataProps) => {
-    const { data, add } = useContext(context);
+const AnalyticsContainer = ({ children, name, data }: AnalyticsDataProps) => {
+    const namespaces = useContext(namespacesContext);
+    const { add } = useContext(globalAnalyticsContext);
 
-    useEffect((...attrs) => {
-        add(name);
-    });
+    const newNamespaces = useMemo(() => [...namespaces, name], [name]);
+    add(newNamespaces.join('.'), data);
 
-    return <Consumer>{() => children}</Consumer>;
+    return <NamespacesProvider value={newNamespaces}>{children}</NamespacesProvider>;
 };
 
 const useAnalytics = () => {
-    const { data } = useContext(context);
+    const { fire } = useContext(globalAnalyticsContext);
+    const namespaces = useContext(namespacesContext);
 
-    const fire = () => {
-        console.log('event is fired!', data);
+    const localFire = (payload: AnalyticsData) => {
+        fire(namespaces.join('.'), payload);
     };
 
     return {
-        data,
-        fire,
+        fire: localFire,
     };
 };
 
-export { AnalyticsProvider, AnalyticsData, useAnalytics };
+export { AnalyticsProvider, AnalyticsContainer, useAnalytics };

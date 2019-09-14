@@ -25,6 +25,9 @@ module.exports = {
         // just annoying
         '@typescript-eslint/explicit-function-return-type': 'off',
 
+        // all of them are in stories
+        'import/no-extraneous-dependencies': 'off',
+
         // https://github.com/prettier/eslint-plugin-prettier
         // enforce code formatting according to prettier
         'prettier/prettier': 'error',
